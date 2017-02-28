@@ -1,0 +1,387 @@
+<!-- Credit to http://bl.ocks.org/d3noob/a22c42db65eb00d4e369 for tooltip styling -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Test</title>
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+    </head>
+    <style>
+
+        div.tooltip {   
+            position: absolute;         
+            text-align: center;         
+            width: 160px;                    
+            height: 128px;                   
+            padding: 2px;               
+            font: 12px sans-serif;      
+            background: lightsteelblue; 
+            border: 0px;        
+            border-radius: 8px;         
+            pointer-events: none;           
+        }
+    </style>
+    <body>
+        <script type="text/javascript">
+    
+            d3.select("body").
+                append("h1")
+                .text("Electoral Map")
+                .style("color", "black");
+
+            var width = 800;
+            var height = 600;
+            var xScale = d3.scaleLinear().range([0,width]).domain([0,100]);
+            var circleScaleX = d3.scaleLinear().range([0,width]).domain([0,13]);
+            var circleScaleY = d3.scaleLinear().range([0,height]).domain([0,11]);
+            var xAxis = d3.axisBottom().scale(xScale);
+
+            var canvas = d3.select("body")
+                            .append("svg")
+                            .attr("width", width)
+                            .attr("height", height);
+            var col1 = ["Alaska"];
+            var col2 = ["Washington","Oregon","Hawaii","California"];
+            var col3 = ["Idaho","Nevada","Utah","Arizona"];
+            var col4 = ["Montana","Wyoming","Colorado","New Mexico"];
+            var col5 = ["North Dakota","South Dakota","Nebraska","Kansas","Oklahoma","Texas"];
+            var col6 = ["Minnesota","Iowa","Missouri","Arkansas","Louisiana"];
+            var col7 = ["Illinois","Indiana","Kentucky","Tennessee","Mississippi"];
+            var col8 = ["Wisconsin","Ohio","West Virginia","North Carolina","Alabama"];
+            var col9 = ["Michigan","Virginia","South Carolina","Georgia","Pennsylvania"];
+            var col10 = ["New York","New Jersey","Maryland","Delaware","Florida"];
+            var col11 = ["Vermont","Rhode Island","Connecticut","Washington, D.C."];
+            var col12 = ["Maine","New Hampshire","Massachusetts"];
+
+
+            var statePosXMapping = function(d) {
+                if(col1.indexOf(d) != -1){
+                    return circleScaleX(1);
+                }
+                if(col2.indexOf(d) != -1){
+                    return circleScaleX(2);
+                }
+                if(col3.indexOf(d) != -1){
+                    return circleScaleX(3);
+                }
+                if(col4.indexOf(d) != -1){
+                    return circleScaleX(4);
+                }
+                if(col5.indexOf(d) != -1){
+                    return circleScaleX(5);
+                }
+                if(col6.indexOf(d) != -1){
+                    return circleScaleX(6);
+                }
+                if(col7.indexOf(d) != -1){
+                    return circleScaleX(7);
+                }
+                if(col8.indexOf(d) != -1){
+                    return circleScaleX(8);
+                }
+                if(col9.indexOf(d) != -1){
+                    return circleScaleX(9);
+                }
+                if(col10.indexOf(d) != -1){
+                    return circleScaleX(10);
+                }
+                if(col11.indexOf(d) != -1){
+                    return circleScaleX(11);
+                }
+                if(col12.indexOf(d) != -1){
+                    return circleScaleX(12);
+                }
+            }
+
+            var statePosXMappingText = function(d) {
+                if(col1.indexOf(d) != -1){
+                    return circleScaleX(1.25);
+                }
+                if(col2.indexOf(d) != -1){
+                    return circleScaleX(2.25);
+                }
+                if(col3.indexOf(d) != -1){
+                    return circleScaleX(3.25);
+                }
+                if(col4.indexOf(d) != -1){
+                    return circleScaleX(4.25);
+                }
+                if(col5.indexOf(d) != -1){
+                    return circleScaleX(5.25);
+                }
+                if(col6.indexOf(d) != -1){
+                    return circleScaleX(6.25);
+                }
+                if(col7.indexOf(d) != -1){
+                    return circleScaleX(7.25);
+                }
+                if(col8.indexOf(d) != -1){
+                    return circleScaleX(8.25);
+                }
+                if(col9.indexOf(d) != -1){
+                    return circleScaleX(9.25);
+                }
+                if(col10.indexOf(d) != -1){
+                    return circleScaleX(10.25);
+                }
+                if(col11.indexOf(d) != -1){
+                    return circleScaleX(11.25);
+                }
+                if(col12.indexOf(d) != -1){
+                    return circleScaleX(12.25);
+                }
+            }
+            
+            var row1 = ["Alaska","Maine"];
+            var row2 = ["Vermont","New Hampshire"];
+            var row3 = ["Washington","Idaho","Montana","North Dakota","Minnesota","Illinois","Wisconsin","Michigan","New York","Rhode Island","Massachusetts"];
+            var row4 = ["Oregon","Nevada","Wyoming","South Dakota","Iowa","Indiana","Ohio","Pennsylvania","New Jersey","Connecticut"];
+            var row5 = ["California","Utah","Colorado","Nebraska","Missouri","Kentucky","West Virginia","Virginia","Maryland","Washington, D.C."];
+            var row6 = ["Arizona","New Mexico","Kansas","Arkansas","Tennessee","North Carolina","South Carolina","Delaware"];
+            var row7 = ['Oklahoma',"Louisiana","Mississippi","Alabama","Georgia"];
+            var row8 = ["Florida", "Hawaii","Texas"];
+
+            var statePosYMapping = function(d) {
+                if(row1.indexOf(d) != -1) {
+                    return circleScaleY(0);
+                }
+                if(row2.indexOf(d) != -1) {
+                    return circleScaleY(1);
+                }
+                if(row3.indexOf(d) != -1) {
+                    return circleScaleY(2);
+                }
+                if(row4.indexOf(d) != -1) {
+                    return circleScaleY(3);
+                }
+                if(row5.indexOf(d) != -1) {
+                    return circleScaleY(4);
+                }
+                if(row6.indexOf(d) != -1) {
+                    return circleScaleY(5);
+                }
+                if(row7.indexOf(d) != -1) {
+                    return circleScaleY(6);
+                }
+                if(row8.indexOf(d) != -1) {
+                    return circleScaleY(7);
+                }
+            }
+
+            var statePosYMappingText = function(d) {
+                if(row1.indexOf(d) != -1) {
+                    return circleScaleY(0.5);
+                }
+                if(row2.indexOf(d) != -1) {
+                    return circleScaleY(1.5);
+                }
+                if(row3.indexOf(d) != -1) {
+                    return circleScaleY(2.5);
+                }
+                if(row4.indexOf(d) != -1) {
+                    return circleScaleY(3.5);
+                }
+                if(row5.indexOf(d) != -1) {
+                    return circleScaleY(4.5);
+                }
+                if(row6.indexOf(d) != -1) {
+                    return circleScaleY(5.5);
+                }
+                if(row7.indexOf(d) != -1) {
+                    return circleScaleY(6.5);
+                }
+                if(row8.indexOf(d) != -1) {
+                    return circleScaleY(7.5);
+                }
+            }
+
+            var colorScale = function(clintonStr, trumpStr) {
+                clinton = parseFloat(clintonStr.replace("%",""));
+                trump = parseFloat(trumpStr.replace("%",""));
+                var trumpRatio = trump / (trump + clinton);
+                console.log(trumpRatio);
+  
+                if(trumpRatio > 0.6) {
+                    var interpolate = d3.interpolateRgb(d3.rgb(255,0,0),d3.rgb(64,0,0));
+                    return interpolate((trumpRatio-0.6)/0.4);
+                }
+                if(trumpRatio > 0.5) {
+                    var interpolate = d3.interpolateRgb(d3.rgb(255,255,255),d3.rgb(255,0,0));
+                    return interpolate((trumpRatio-0.5)/0.1);
+                }
+                if(trumpRatio > 0.4) {
+                    var interpolate = d3.interpolateRgb(d3.rgb(0,0,255),d3.rgb(255,255,255));
+                    return interpolate((trumpRatio-0.4)/0.1);
+                }
+                else {
+                    var interpolate = d3.interpolateRgb(d3.rgb(0,0,64),d3.rgb(0,0,255));
+                    return interpolate(trumpRatio/0.4);
+                }
+                
+            }
+
+/**
+            var stateHover = d3.select("canvas").append("g");
+            
+            var tooltip = d3.select("canvas")
+                        .text("a simple tooltip");**/
+
+            var stateHover = d3.select("body").append("div")   
+                .attr("class", "tooltip")               
+                .style("opacity", 0.2);
+
+            var electoralTotal = function(d) {
+                return parseFloat(d['Electoral Votes Clinton']) + parseFloat(d['Electoral Votes Trump']);
+            };
+
+
+            d3.csv("election-results.csv", function(data) {
+
+                console.log(data);
+
+
+                 canvas.selectAll("rect")
+                    .data(data)
+                    .enter()
+                    .append("rect")
+                    .attr("width", 60)
+                    .attr("height",50)
+                    .attr("x",function(d) {
+                        return statePosXMapping(d['State or district']);
+                    })
+                    .attr("y",function(d) {
+                        return statePosYMapping(d['State or district']);
+                    })
+                    .style("border-width",2)
+                    .style("fill", function(d){
+                        return colorScale(d['% Clinton'],d['% Trump']);
+                    })
+                    .on("mouseover", function(d) {      
+                        stateHover.transition()        
+                            .duration(50)      
+                            .style("opacity", .9);      
+                        stateHover.html("<h3>" + d['State or district'] + "</h3>" + "<h4>Electoral votes: " + electoralTotal(d) +"</h4><p>Hillary Clinton: " + d['# Clinton'] + "</p><p>Donald Trump: " + d['# Trump']+"</p>")
+                            .style("left", (d3.event.pageX) + "px")     
+                            .style("top", (d3.event.pageY) + "px");    
+                        })                  
+                    .on("mouseout", function(d) {       
+                        div.transition()        
+                            .duration(50)      
+                            .style("opacity", 0);   
+                    });
+
+                canvas.selectAll("text").data(data).enter().append("text")
+                    .attr("x",function(d) {
+                        return statePosXMappingText(d['State or district']);
+                    })
+                    .attr("y",function(d) {
+                        return statePosYMappingText(d['State or district']);
+                    }).style("fill",d3.rgb(100,100,100)).text(function(d) {return d[''];})
+                    .on("mouseover", function(d) {      
+                        stateHover.transition()        
+                            .duration(50)      
+                            .style("opacity", .9);      
+                        stateHover.html("<h3>" + d['State or district'] + "</h3>" + "<h4>Electoral votes: " + electoralTotal(d) +"</h4><p>Hillary Clinton: " + d['# Clinton'] + "</p><p>Donald Trump: " + d['# Trump']+"</p>")   
+                            .style("left", (d3.event.pageX) + "px")     
+                            .style("top", (d3.event.pageY) + "px");    
+                        })                  
+                    .on("mouseout", function(d) {       
+                        div.transition()        
+                            .duration(50)      
+                            .style("opacity", 0);   
+                    });
+                    ;
+
+                var gradient = canvas.append("defs")
+                  .append("linearGradient")
+                    .attr("id", "gradient")
+                    .attr("spreadMethod", "pad");
+
+                gradient.append("stop")
+                    .attr("offset", "0%")
+                    .attr("stop-color", d3.rgb(0,0,62))
+                    .attr("stop-opacity", 1);
+                    
+                gradient.append("stop")
+                    .attr("offset", "40%")
+                    .attr("stop-color", d3.rgb(0,0,255))
+                    .attr("stop-opacity", 1);
+
+                gradient.append("stop")
+                    .attr("offset", "50%")
+                    .attr("stop-color", d3.rgb(255,255,255))
+                    .attr("stop-opacity", 1);
+
+                gradient.append("stop")
+                    .attr("offset", "60%")
+                    .attr("stop-color", d3.rgb(255,0,0))
+                    .attr("stop-opacity", 1);
+
+                gradient.append("stop")
+                    .attr("offset", "100%")
+                    .attr("stop-color", d3.rgb(64,0,0))
+                    .attr("stop-opacity", 1);
+
+                canvas.append("rect")
+                    .attr("x", 0.1*width)
+                    .attr("y", 0.8*height)
+                    .attr("width", 0.8*width)
+                    .attr("height", height*0.05)
+                    .style("fill", "url(#gradient)");
+
+                canvas.append("text").attr("x", 0.09*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("0%");
+
+                  canvas.append("text").attr("x", 0.29*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("25%");
+
+                  canvas.append("text").attr("x", 0.49*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("50%");
+
+                  canvas.append("text").attr("x", 0.69*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("75%");
+
+                  canvas.append("text").attr("x", 0.89*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("100%");
+
+                  canvas.append("text").attr("x", 0.09*width).attr("y", 0.91 * height).style("fill",d3.rgb(0,0,0)).text("Percent Trump voters out of those who voted for Hillary or Trump");
+
+                canvas.append("rect").
+                attr("x",0.1*width).
+                attr("y",0.8*height).
+                attr("width",2).
+                attr("height",0.055*height).
+                style("fill", d3.rgb(0,0,0));
+
+                canvas.append("rect").
+                attr("x",0.3*width).
+                attr("y",0.8*height).
+                attr("width",2).
+                attr("height",0.055*height).
+                style("fill", d3.rgb(0,0,0));
+
+                canvas.append("rect").
+                attr("x",0.5*width).
+                attr("y",0.8*height).
+                attr("width",2).
+                attr("height",0.055*height).
+                style("fill", d3.rgb(0,0,0));
+
+                canvas.append("rect").
+                attr("x",0.7*width).
+                attr("y",0.8*height).
+                attr("width",2).
+                attr("height",0.055*height).
+                style("fill", d3.rgb(0,0,0));
+
+                canvas.append("rect").
+                attr("x",0.9*width).
+                attr("y",0.8*height).
+                attr("width",2).
+                attr("height",0.055*height).
+                style("fill", d3.rgb(0,0,0));
+
+
+
+            });
+
+        </script>
+    </body>
+</html>
