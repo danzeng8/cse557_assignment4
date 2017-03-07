@@ -33,15 +33,457 @@
 
             var width = 800;
             var height = 600;
+            var outerWidth = 1200;
             var xScale = d3.scaleLinear().range([0,width]).domain([0,100]);
             var circleScaleX = d3.scaleLinear().range([0,width]).domain([0,13]);
             var circleScaleY = d3.scaleLinear().range([0,height]).domain([0,11]);
             var xAxis = d3.axisBottom().scale(xScale);
+            var electionResultsFormat = 1;
+            var electionYearCsv = "election-results.csv";
 
-            var canvas = d3.select("body")
+            var timeline = d3.select("body")
                             .append("svg")
                             .attr("width", width)
-                            .attr("height", height);
+                            .attr("height", 30);
+            var imgName = "2016.jpg";
+
+            function drawTimeLine() {
+
+                timeline.append("rect").
+                attr("x",0.1*width).
+                attr("y",8).
+                attr("width",0.85*width).
+                attr("height", 0.008*height).style("fill","black");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1940.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1940.jpg";
+                            updateData(electionResultsFormat);
+                            
+                        }
+
+                        );
+
+                 timeline.append("text").
+                    attr("x",0.08*width)
+                    .attr("y",30).text("1940");
+                
+                 timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(1/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1944.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1944.jpg";
+                            updateData(electionResultsFormat);
+                            
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(1/20)*0.9*width)
+                    .attr("y",30).text("1944");
+
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(2/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1948.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1948.jpg";
+                            updateData(electionResultsFormat);
+                            
+                        }
+
+                        );
+
+
+                timeline.append("text").
+                    attr("x",0.08*width+(2/20)*0.9*width)
+                    .attr("y",30).text("1948");
+                
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(3/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1952.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1952.jpg";
+                            updateData(electionResultsFormat);
+                            
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(3/20)*0.9*width)
+                    .attr("y",30).text("1952");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(4/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1956.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1956.jpg";
+                            updateData(electionResultsFormat);
+                            
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(4/20)*0.9*width)
+                    .attr("y",30).text("1956");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(5/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1960.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1960.jpg";
+                            updateData(electionResultsFormat);
+                            
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(5/20)*0.9*width)
+                    .attr("y",30).text("1960");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(6/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1964.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1964.jpg";
+                            updateData(electionResultsFormat);
+
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(6/20)*0.9*width)
+                    .attr("y",30).text("1964");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(7/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1968.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1968.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(7/20)*0.9*width)
+                    .attr("y",30).text("1968");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(8/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1972.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1972.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(8/20)*0.9*width)
+                    .attr("y",30).text("1972");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(9/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1976.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1976.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(9/20)*0.9*width)
+                    .attr("y",30).text("1976")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1980.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(10/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1980.csv";
+                            console.log(electionYearCsv);
+                            imgName = "1980.jpg";
+                            electionResultsFormat = 0;
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(10/20)*0.9*width)
+                    .attr("y",30).text("1980");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(11/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1984.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1984.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(11/20)*0.9*width)
+                    .attr("y",30).text("1984")
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(12/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1988.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1988.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(12/20)*0.9*width)
+                    .attr("y",30).text("1988");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(13/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1992.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1992.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(13/20)*0.9*width)
+                    .attr("y",30).text("1992");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(14/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-1996.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "1996.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(14/20)*0.9*width)
+                    .attr("y",30).text("1996");
+
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(15/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-2000.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "2000.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(15/20)*0.9*width)
+                    .attr("y",30).text("2000");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(16/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-2004.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "2004.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(16/20)*0.9*width)
+                    .attr("y",30).text("2004");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(17/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-2008.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "2008.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(17/20)*0.9*width)
+                    .attr("y",30).text("2008");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(18/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","blue")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-2012.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "2012.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(18/20)*0.9*width)
+                    .attr("y",30).text("2012");
+
+                timeline.append("circle").
+                    attr("r",7)
+                    .attr("cx",0.1*width+(19/20)*0.9*width)
+                    .attr("cy",10)
+                    .style("fill","red")
+                    .on("click",
+                        function() {
+                            electionYearCsv = "election-results-2016.csv";
+                            console.log(electionYearCsv);
+                            electionResultsFormat = 0;
+                            imgName = "2016.jpg";
+                            updateData(electionResultsFormat);
+                        }
+
+                        );
+
+                timeline.append("text").
+                    attr("x",0.08*width+(19/20)*0.9*width)
+                    .attr("y",30).text("2016");
+
+            };
+             
+            drawTimeLine();
+
+            
+            var canvas = d3.select("body")
+                                    .append("svg")
+                                    .attr("width", outerWidth)
+                                    .attr("height", height);
+
             var col1 = ["Alaska"];
             var col2 = ["Washington","Oregon","Hawaii","California"];
             var col3 = ["Idaho","Nevada","Utah","Arizona"];
@@ -52,7 +494,7 @@
             var col8 = ["Wisconsin","Ohio","West Virginia","North Carolina","Alabama"];
             var col9 = ["Michigan","Virginia","South Carolina","Georgia","Pennsylvania"];
             var col10 = ["New York","New Jersey","Maryland","Delaware","Florida"];
-            var col11 = ["Vermont","Rhode Island","Connecticut","Washington, D.C."];
+            var col11 = ["Vermont","Rhode Island","Connecticut","Washington, D.C.","Dist. of Col."];
             var col12 = ["Maine","New Hampshire","Massachusetts"];
 
 
@@ -138,7 +580,7 @@
             var row2 = ["Vermont","New Hampshire"];
             var row3 = ["Washington","Idaho","Montana","North Dakota","Minnesota","Illinois","Wisconsin","Michigan","New York","Rhode Island","Massachusetts"];
             var row4 = ["Oregon","Nevada","Wyoming","South Dakota","Iowa","Indiana","Ohio","Pennsylvania","New Jersey","Connecticut"];
-            var row5 = ["California","Utah","Colorado","Nebraska","Missouri","Kentucky","West Virginia","Virginia","Maryland","Washington, D.C."];
+            var row5 = ["California","Utah","Colorado","Nebraska","Missouri","Kentucky","West Virginia","Virginia","Maryland","Washington, D.C.","Dist. of Col."];
             var row6 = ["Arizona","New Mexico","Kansas","Arkansas","Tennessee","North Carolina","South Carolina","Delaware"];
             var row7 = ['Oklahoma',"Louisiana","Mississippi","Alabama","Georgia"];
             var row8 = ["Florida", "Hawaii","Texas"];
@@ -222,6 +664,29 @@
                 
             }
 
+            var colorScaleOtherElections = function(demStr, repStr) {
+                            var dem = parseFloat(demStr);
+                            var rep = parseFloat(repStr);
+                            var repRatio = rep / (rep + dem);
+              
+                            if(repRatio > 0.6) {
+                                var interpolate = d3.interpolateRgb(d3.rgb(255,0,0),d3.rgb(64,0,0));
+                                return interpolate((repRatio-0.6)/0.4);
+                            }
+                            if(repRatio > 0.5) {
+                                var interpolate = d3.interpolateRgb(d3.rgb(255,255,255),d3.rgb(255,0,0));
+                                return interpolate((repRatio-0.5)/0.1);
+                            }
+                            if(repRatio > 0.4) {
+                                var interpolate = d3.interpolateRgb(d3.rgb(0,0,255),d3.rgb(255,255,255));
+                                return interpolate((repRatio-0.4)/0.1);
+                            }
+                            else {
+                                var interpolate = d3.interpolateRgb(d3.rgb(0,0,64),d3.rgb(0,0,255));
+                                return interpolate(repRatio/0.4);
+                            }
+                            
+                        }
 /**
             var stateHover = d3.select("canvas").append("g");
             
@@ -230,157 +695,341 @@
 
             var stateHover = d3.select("body").append("div")   
                 .attr("class", "tooltip")               
-                .style("opacity", 0.2);
+                .style("opacity", 0.0);
 
             var electoralTotal = function(d) {
                 return parseFloat(d['Electoral Votes Clinton']) + parseFloat(d['Electoral Votes Trump']);
             };
 
+            var marginTop = 10.0;
 
-            d3.csv("election-results.csv", function(data) {
+            function updateData(isInitial) {
+                if(isInitial == 0) {
+                    d3.selectAll("svg").remove();
 
-                console.log(data);
+                    timeline = d3.select("body")
+                            .append("svg")
+                            .attr("width", width)
+                            .attr("height", 30);
+            
 
+                    drawTimeLine();
 
-                 canvas.selectAll("rect")
-                    .data(data)
-                    .enter()
-                    .append("rect")
-                    .attr("width", 60)
-                    .attr("height",50)
-                    .attr("x",function(d) {
-                        return statePosXMapping(d['State or district']);
-                    })
-                    .attr("y",function(d) {
-                        return statePosYMapping(d['State or district']);
-                    })
-                    .style("border-width",2)
-                    .style("fill", function(d){
-                        return colorScale(d['% Clinton'],d['% Trump']);
-                    })
-                    .on("mouseover", function(d) {      
-                        stateHover.transition()        
-                            .duration(50)      
-                            .style("opacity", .9);      
-                        stateHover.html("<h3>" + d['State or district'] + "</h3>" + "<h4>Electoral votes: " + electoralTotal(d) +"</h4><p>Hillary Clinton: " + d['# Clinton'] + "</p><p>Donald Trump: " + d['# Trump']+"</p>")
-                            .style("left", (d3.event.pageX) + "px")     
-                            .style("top", (d3.event.pageY) + "px");    
-                        })                  
-                    .on("mouseout", function(d) {       
-                        div.transition()        
-                            .duration(50)      
-                            .style("opacity", 0);   
-                    });
-
-                canvas.selectAll("text").data(data).enter().append("text")
-                    .attr("x",function(d) {
-                        return statePosXMappingText(d['State or district']);
-                    })
-                    .attr("y",function(d) {
-                        return statePosYMappingText(d['State or district']);
-                    }).style("fill",d3.rgb(100,100,100)).text(function(d) {return d[''];})
-                    .on("mouseover", function(d) {      
-                        stateHover.transition()        
-                            .duration(50)      
-                            .style("opacity", .9);      
-                        stateHover.html("<h3>" + d['State or district'] + "</h3>" + "<h4>Electoral votes: " + electoralTotal(d) +"</h4><p>Hillary Clinton: " + d['# Clinton'] + "</p><p>Donald Trump: " + d['# Trump']+"</p>")   
-                            .style("left", (d3.event.pageX) + "px")     
-                            .style("top", (d3.event.pageY) + "px");    
-                        })                  
-                    .on("mouseout", function(d) {       
-                        div.transition()        
-                            .duration(50)      
-                            .style("opacity", 0);   
-                    });
-                    ;
-
-                var gradient = canvas.append("defs")
-                  .append("linearGradient")
-                    .attr("id", "gradient")
-                    .attr("spreadMethod", "pad");
-
-                gradient.append("stop")
-                    .attr("offset", "0%")
-                    .attr("stop-color", d3.rgb(0,0,62))
-                    .attr("stop-opacity", 1);
+                    canvas = d3.select("body")
+                                    .append("svg")
+                                    .attr("width", outerWidth)
+                                    .attr("height", height);
                     
-                gradient.append("stop")
-                    .attr("offset", "40%")
-                    .attr("stop-color", d3.rgb(0,0,255))
-                    .attr("stop-opacity", 1);
+                    d3.csv(electionYearCsv, function(data) {
 
-                gradient.append("stop")
-                    .attr("offset", "50%")
-                    .attr("stop-color", d3.rgb(255,255,255))
-                    .attr("stop-opacity", 1);
+                           /** canvas.append("rect").
+                            attr("x",0).
+                            attr("y",0).
+                            attr("width",width).
+                            attr("height",height).
+                            style("fill", "white");**/
 
-                gradient.append("stop")
-                    .attr("offset", "60%")
-                    .attr("stop-color", d3.rgb(255,0,0))
-                    .attr("stop-opacity", 1);
+                            canvas.selectAll("rect")
+                                .data(data)
+                                .enter()
+                                .append("rect")
+                                .attr("width", 60)
+                                .attr("height",50)
+                                .attr("x",function(d) {
+                                    return statePosXMapping(d['State']);
+                                })
+                                .attr("y",function(d) {
+                                    return marginTop+statePosYMapping(d['State']);
+                                })
+                                .style("border-width",2)
+                                .style("fill", function(d){
+                                    return colorScaleOtherElections(d['D_Percentage'],d['R_Percentage']);
+                                })
+                                .on("mouseover", function(d) {      
+                                    stateHover.transition()        
+                                        .duration(50)      
+                                        .style("opacity", .9);      
+                                    stateHover.html("<h3>" + d['State'] + "</h3>" + "<h4>Electoral votes: " + d['Total_EV'] +"</h4><p>" + d['D_Nominee'] + ": " + d['D_Votes'] + "</p><p>" + d['R_Nominee'] + ": "+ d['R_Votes']+"</p>")
+                                        .style("left", (d3.event.pageX) + "px")     
+                                        .style("top", (d3.event.pageY) + "px");    
+                                    })                  
+                                .on("mouseout", function(d) {       
+                                    stateHover.transition()        
+                                        .duration(50)      
+                                        .style("opacity", 0);   
+                                });
 
-                gradient.append("stop")
-                    .attr("offset", "100%")
-                    .attr("stop-color", d3.rgb(64,0,0))
-                    .attr("stop-opacity", 1);
+                            canvas.selectAll("text").data(data).enter().append("text")
+                                .attr("x",function(d) {
+                                    return statePosXMappingText(d['State']);
+                                })
+                                .attr("y",function(d) {
+                                    return marginTop+statePosYMappingText(d['State']);
+                                }).style("fill",d3.rgb(100,100,100)).text(function(d) {return d['Abbreviation'];})
+                               .on("mouseover", function(d) {      
+                                    stateHover.transition()        
+                                        .duration(50)      
+                                        .style("opacity", .9);      
+                                    stateHover.html("<h3>" + d['State'] + "</h3>" + "<h4>Electoral votes: " + d['Total_EV'] +"</h4><p>" + d['D_Nominee'] + ": " + d['D_Votes'] + "</p><p>" + d['R_Nominee'] + ": "+ d['R_Votes']+"</p>")
+                                        .style("left", (d3.event.pageX) + "px")     
+                                        .style("top", (d3.event.pageY) + "px");    
+                                    })                    
+                                .on("mouseout", function(d) {       
+                                    stateHover.transition()        
+                                        .duration(50)      
+                                        .style("opacity", 0);   
+                                });
+                                ;
 
-                canvas.append("rect")
-                    .attr("x", 0.1*width)
-                    .attr("y", 0.8*height)
-                    .attr("width", 0.8*width)
-                    .attr("height", height*0.05)
-                    .style("fill", "url(#gradient)");
+                            var gradient = canvas.append("defs")
+                              .append("linearGradient")
+                                .attr("id", "gradient")
+                                .attr("spreadMethod", "pad");
 
-                canvas.append("text").attr("x", 0.09*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("0%");
+                            gradient.append("stop")
+                                .attr("offset", "0%")
+                                .attr("stop-color", d3.rgb(0,0,62))
+                                .attr("stop-opacity", 1);
+                                
+                            gradient.append("stop")
+                                .attr("offset", "40%")
+                                .attr("stop-color", d3.rgb(0,0,255))
+                                .attr("stop-opacity", 1);
 
-                  canvas.append("text").attr("x", 0.29*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("25%");
+                            gradient.append("stop")
+                                .attr("offset", "50%")
+                                .attr("stop-color", d3.rgb(255,255,255))
+                                .attr("stop-opacity", 1);
 
-                  canvas.append("text").attr("x", 0.49*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("50%");
+                            gradient.append("stop")
+                                .attr("offset", "60%")
+                                .attr("stop-color", d3.rgb(255,0,0))
+                                .attr("stop-opacity", 1);
 
-                  canvas.append("text").attr("x", 0.69*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("75%");
+                            gradient.append("stop")
+                                .attr("offset", "100%")
+                                .attr("stop-color", d3.rgb(64,0,0))
+                                .attr("stop-opacity", 1);
 
-                  canvas.append("text").attr("x", 0.89*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("100%");
+                            canvas.append("rect")
+                                .attr("x", 0.1*width)
+                                .attr("y", 0.8*height)
+                                .attr("width", 0.8*width)
+                                .attr("height", height*0.05)
+                                .style("fill", "url(#gradient)");
 
-                  canvas.append("text").attr("x", 0.09*width).attr("y", 0.91 * height).style("fill",d3.rgb(0,0,0)).text("Percent Trump voters out of those who voted for Hillary or Trump");
+                            canvas.append("text").attr("x", 0.09*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("0%");
 
-                canvas.append("rect").
-                attr("x",0.1*width).
-                attr("y",0.8*height).
-                attr("width",2).
-                attr("height",0.055*height).
-                style("fill", d3.rgb(0,0,0));
+                              canvas.append("text").attr("x", 0.29*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("25%");
 
-                canvas.append("rect").
-                attr("x",0.3*width).
-                attr("y",0.8*height).
-                attr("width",2).
-                attr("height",0.055*height).
-                style("fill", d3.rgb(0,0,0));
+                              canvas.append("text").attr("x", 0.49*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("50%");
 
-                canvas.append("rect").
-                attr("x",0.5*width).
-                attr("y",0.8*height).
-                attr("width",2).
-                attr("height",0.055*height).
-                style("fill", d3.rgb(0,0,0));
+                              canvas.append("text").attr("x", 0.69*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("75%");
 
-                canvas.append("rect").
-                attr("x",0.7*width).
-                attr("y",0.8*height).
-                attr("width",2).
-                attr("height",0.055*height).
-                style("fill", d3.rgb(0,0,0));
+                              canvas.append("text").attr("x", 0.89*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("100%");
 
-                canvas.append("rect").
-                attr("x",0.9*width).
-                attr("y",0.8*height).
-                attr("width",2).
-                attr("height",0.055*height).
-                style("fill", d3.rgb(0,0,0));
+                              canvas.append("text").attr("x", 0.09*width).attr("y", 0.91 * height).style("fill",d3.rgb(0,0,0)).text("Percent Republican voters out of those who voted Democrat or Republican");
+
+                            canvas.append("rect").
+                            attr("x",0.1*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("rect").
+                            attr("x",0.3*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("rect").
+                            attr("x",0.5*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("rect").
+                            attr("x",0.7*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("rect").
+                            attr("x",0.9*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("svg:image")
+                            .attr('x', width)
+                            .attr('y', 0)
+                            .attr('width', 0.4*width)
+                            .attr("xlink:href",imgName);
+
+                           // });
 
 
+                        });
+                    }
+                    else {
+                         d3.csv(electionYearCsv, function(data) {
 
-            });
+
+                             canvas.selectAll("rect")
+                                .data(data)
+                                .enter()
+                                .append("rect")
+                                .attr("width", 60)
+                                .attr("height",50)
+                                .attr("x",function(d) {
+                                    return statePosXMapping(d['State or district']);
+                                })
+                                .attr("y",function(d) {
+                                    return marginTop+statePosYMapping(d['State or district']);
+                                })
+                                .style("border-width",2)
+                                .style("fill", function(d){
+                                    return colorScale(d['% Clinton'],d['% Trump']);
+                                })
+                                .on("mouseover", function(d) {      
+                                    stateHover.transition()        
+                                        .duration(50)      
+                                        .style("opacity", .9);      
+                                    stateHover.html("<h3>" + d['State or district'] + "</h3>" + "<h4>Electoral votes: " + electoralTotal(d) +"</h4><p>Hillary Clinton: " + d['# Clinton'] + "</p><p>Donald Trump: " + d['# Trump']+"</p>")
+                                        .style("left", (d3.event.pageX) + "px")     
+                                        .style("top", (d3.event.pageY) + "px");    
+                                    })                  
+                                .on("mouseout", function(d) {       
+                                    stateHover.transition()        
+                                        .duration(50)      
+                                        .style("opacity", 0);   
+                                });
+
+                            canvas.selectAll("text").data(data).enter().append("text")
+                                .attr("x",function(d) {
+                                    return statePosXMappingText(d['State or district']);
+                                })
+                                .attr("y",function(d) {
+                                    return marginTop+statePosYMappingText(d['State or district']);
+                                }).style("fill",d3.rgb(100,100,100)).text(function(d) {return d[''];})
+                               .on("mouseover", function(d) {      
+                                    stateHover.transition()        
+                                        .duration(50)      
+                                        .style("opacity", .9);      
+                                    stateHover.html("<h3>" + d['State or district'] + "</h3>" + "<h4>Electoral votes: " + electoralTotal(d) +"</h4><p>Hillary Clinton: " + d['# Clinton'] + "</p><p>Donald Trump: " + d['# Trump']+"</p>")   
+                                        .style("left", (d3.event.pageX) + "px")     
+                                        .style("top", (d3.event.pageY) + "px");    
+                                    })                  
+                                .on("mouseout", function(d) {       
+                                    stateHover.transition()        
+                                        .duration(50)      
+                                        .style("opacity", 0);   
+                                });
+                                ;
+
+                            var gradient = canvas.append("defs")
+                              .append("linearGradient")
+                                .attr("id", "gradient")
+                                .attr("spreadMethod", "pad");
+
+                            gradient.append("stop")
+                                .attr("offset", "0%")
+                                .attr("stop-color", d3.rgb(0,0,62))
+                                .attr("stop-opacity", 1);
+                                
+                            gradient.append("stop")
+                                .attr("offset", "40%")
+                                .attr("stop-color", d3.rgb(0,0,255))
+                                .attr("stop-opacity", 1);
+
+                            gradient.append("stop")
+                                .attr("offset", "50%")
+                                .attr("stop-color", d3.rgb(255,255,255))
+                                .attr("stop-opacity", 1);
+
+                            gradient.append("stop")
+                                .attr("offset", "60%")
+                                .attr("stop-color", d3.rgb(255,0,0))
+                                .attr("stop-opacity", 1);
+
+                            gradient.append("stop")
+                                .attr("offset", "100%")
+                                .attr("stop-color", d3.rgb(64,0,0))
+                                .attr("stop-opacity", 1);
+
+                            canvas.append("rect")
+                                .attr("x", 0.1*width)
+                                .attr("y", 0.8*height)
+                                .attr("width", 0.8*width)
+                                .attr("height", height*0.05)
+                                .style("fill", "url(#gradient)");
+
+                            canvas.append("text").attr("x", 0.09*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("0%");
+
+                              canvas.append("text").attr("x", 0.29*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("25%");
+
+                              canvas.append("text").attr("x", 0.49*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("50%");
+
+                              canvas.append("text").attr("x", 0.69*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("75%");
+
+                              canvas.append("text").attr("x", 0.89*width).attr("y", 0.88 * height).style("fill",d3.rgb(0,0,0)).text("100%");
+
+                              canvas.append("text").attr("x", 0.09*width).attr("y", 0.91 * height).style("fill",d3.rgb(0,0,0)).text("Percent Trump voters out of those who voted for Hillary or Trump");
+
+                            canvas.append("rect").
+                            attr("x",0.1*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("rect").
+                            attr("x",0.3*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("rect").
+                            attr("x",0.5*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("rect").
+                            attr("x",0.7*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("rect").
+                            attr("x",0.9*width).
+                            attr("y",0.8*height).
+                            attr("width",2).
+                            attr("height",0.055*height).
+                            style("fill", d3.rgb(0,0,0));
+
+                            canvas.append("svg:image")
+                            .attr('x', width)
+                            .attr('y', 0)
+                            .attr('width', 0.4*width)
+                            .attr("xlink:href",imgName);
+
+                            });
+
+                    
+                    }
+            };
+            updateData(electionResultsFormat);
+
+
 
         </script>
     </body>
